@@ -28,7 +28,6 @@
 
 - (NSArray *) listReviews:(NSString *)host {
     NSString *data = [self stringHttpGetContentsAtURL:[self makeURL: host withPath:@"reviews"]];
-    //NSLog(@"%@\n", data);
     return [self parseJSONList:data];
 }
 
@@ -73,7 +72,7 @@
     }
 }
 
-- (void) AddReview:(NSString *)host
+- (void) addReview:(NSString *)host
       withDelegate: (id<NSURLConnectionDataDelegate>) callback
           withUser: (NSNumber *) theUser
     withRestaurant: (NSNumber *) theRestaurant
@@ -104,6 +103,17 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setHTTPBody:jsonData];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:callback];
+    [connection start];
+}
+
+- (void) DeleteReview:(NSString *)host
+         withDelegate: (id<NSURLConnectionDataDelegate>) callback
+             withLocation: (NSString *) theReview {
+    NSMutableURLRequest *request = [NSMutableURLRequest
+                                    requestWithURL:[NSURL URLWithString:theReview]];
+    [request setHTTPMethod:@"DELETE"];
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:callback];
     [connection start];

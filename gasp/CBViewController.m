@@ -12,6 +12,8 @@
 #import "CBGaspUsers.h"
 #import "CBGaspPlaces.h"
 #import "CBAddReviewDelegate.h"
+#import "CBAddUserDelegate.h"
+#import "CBAddRestaurantDelegate.h"
 
 #import <GoogleMaps/GoogleMaps.h>
 
@@ -79,12 +81,21 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
 
 - (void)addReview {
     CBGaspReviews *client = [[CBGaspReviews alloc] init];
-
-    //[client AddReview:HOST withUser:@1 withRestaurant:@1 withStar:@5 withComments:@"Great"];
-    
     CBAddReviewDelegate *addReviewHandler = [[CBAddReviewDelegate alloc] init];
-    [client AddReview:HOST withDelegate:addReviewHandler withUser:@1 withRestaurant:@1 withStar:@5 withComments:@"Great"];
+    [client addReview:HOST withDelegate:addReviewHandler withUser:@1 withRestaurant:@1 withStar:@5 withComments:@"Great"];
 
+}
+
+- (void)addUser {
+    CBGaspUsers *client = [[CBGaspUsers alloc] init];
+    CBAddUserDelegate *addUserHandler = [[CBAddUserDelegate alloc] init];
+    [client AddUser:HOST withDelegate:addUserHandler withName:@"A N Other"];
+}
+
+- (void)addRestaurant {
+    CBGaspRestaurants *client = [[CBGaspRestaurants alloc] init];
+    CBAddRestaurantDelegate *addRestaurantHandler = [[CBAddRestaurantDelegate alloc] init];
+    [client AddRestaurant:HOST withDelegate:addRestaurantHandler withName:@"Restaurant" withWebsite:@"www.restaruant.com" withPlacesId:@"1234567890"];
 }
 
 - (void)viewDidLoad
@@ -99,8 +110,9 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
     [self loadInitialRestaurants];
     [self loadInitialReviews];
     [self loadInitialUsers];
-    [self addReview];
-    
+    //[self addReview];
+    //[self addUser];
+    //[self addRestaurant];
     
     // Create a GMSCameraPosition that tells the map to display the
     // coordinate -33.86,151.20 at zoom level 6.
@@ -150,7 +162,7 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
             
             CBGaspPlaces* places;
             places = [CBGaspPlaces sharedNetworkClient];
-            [places getGooglePlaces:GOOGLE_TYPES withLocation:latlng withRadius:radius];
+            //[places getGooglePlaces:GOOGLE_TYPES withLocation:latlng withRadius:radius];
             
         } else {
             NSLog(@"%@", error.debugDescription);

@@ -27,7 +27,6 @@
 
 - (NSArray *) listUsers:(NSString *)host {
     NSString *data = [self stringHttpGetContentsAtURL:[self makeURL: host withPath:@"users"]];
-    //NSLog(@"%@\n", data);
     return [self parseJSONList:data];
 }
 
@@ -69,6 +68,42 @@
     } else {
         return nil;
     }
+}
+
+- (void) AddUser:(NSString *)host
+      withDelegate: (id<NSURLConnectionDataDelegate>) callback
+      withName: (NSString *) name {
+    
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys: name, @"name", nil];
+    NSError *error;
+    
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict options:kNilOptions error:&error];
+    NSString *jsonSummary = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSMutableString *json = [[NSMutableString alloc] init];
+    [json setString:jsonSummary];
+    NSLog(@"%@", json);
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest
+                                    requestWithURL:[NSURL URLWithString:[host stringByAppendingString:@"/users"]]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setHTTPBody:jsonData];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:callback];
+    [connection start];
+}
+
+- (void) DeleteReview:(NSString *)host
+         withDelegate: (id<NSURLConnectionDataDelegate>) callback
+         withLocation: (NSString *) theReview {
+    NSMutableURLRequest *request = [NSMutableURLRequest
+                                    requestWithURL:[NSURL URLWithString:theReview]];
+    [request setHTTPMethod:@"DELETE"];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:callback];
+    [connection start];
 }
 
 /*

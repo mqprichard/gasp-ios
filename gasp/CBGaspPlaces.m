@@ -93,9 +93,6 @@
     NSDictionary* json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
     NSDictionary* details = [json objectForKey:@"result"];
     //NSLog(@"Google Data: %@", details);
-        
-    NSString* website = [details objectForKey:@"website"];
-    NSLog(@"Website: %@", website);
 }
 
 @end

@@ -41,6 +41,11 @@
 		4FC7B8D8187E2AD900D2B8D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC7B8D7187E2AD900D2B8D7 /* SystemConfiguration.framework */; };
 		4FC7B8DA187E2EC200D2B8D7 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4FC7B8D9187E2EC200D2B8D7 /* GoogleMaps.bundle */; };
 		4FEA47B5188CB03700941E34 /* CBAddReviewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEA47B4188CB03700941E34 /* CBAddReviewDelegate.m */; };
+		4FF610DA188CBB0E0075B051 /* CBDeleteReviewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF610D9188CBB0E0075B051 /* CBDeleteReviewDelegate.m */; };
+		4FF610DD188CC18C0075B051 /* CBAddUserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF610DC188CC18C0075B051 /* CBAddUserDelegate.m */; };
+		4FF610E0188CC1EB0075B051 /* CBDeleteUserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF610DF188CC1EB0075B051 /* CBDeleteUserDelegate.m */; };
+		4FF610E4188CD7CA0075B051 /* CBAddRestaurantDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF610E3188CD7CA0075B051 /* CBAddRestaurantDelegate.m */; };
+		4FF610E7188CD7DC0075B051 /* CBDeleteRestaurantDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF610E6188CD7DC0075B051 /* CBDeleteRestaurantDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +103,16 @@
 		4FC7B8D9187E2EC200D2B8D7 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = "../../../GoogleMaps-iOS-1.6.1/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle"; sourceTree = "<group>"; };
 		4FEA47B3188CB03700941E34 /* CBAddReviewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBAddReviewDelegate.h; sourceTree = "<group>"; };
 		4FEA47B4188CB03700941E34 /* CBAddReviewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBAddReviewDelegate.m; sourceTree = "<group>"; };
+		4FF610D8188CBB0E0075B051 /* CBDeleteReviewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBDeleteReviewDelegate.h; sourceTree = "<group>"; };
+		4FF610D9188CBB0E0075B051 /* CBDeleteReviewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBDeleteReviewDelegate.m; sourceTree = "<group>"; };
+		4FF610DB188CC18C0075B051 /* CBAddUserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBAddUserDelegate.h; sourceTree = "<group>"; };
+		4FF610DC188CC18C0075B051 /* CBAddUserDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBAddUserDelegate.m; sourceTree = "<group>"; };
+		4FF610DE188CC1EB0075B051 /* CBDeleteUserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBDeleteUserDelegate.h; sourceTree = "<group>"; };
+		4FF610DF188CC1EB0075B051 /* CBDeleteUserDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBDeleteUserDelegate.m; sourceTree = "<group>"; };
+		4FF610E2188CD7CA0075B051 /* CBAddRestaurantDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBAddRestaurantDelegate.h; sourceTree = "<group>"; };
+		4FF610E3188CD7CA0075B051 /* CBAddRestaurantDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBAddRestaurantDelegate.m; sourceTree = "<group>"; };
+		4FF610E5188CD7DC0075B051 /* CBDeleteRestaurantDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBDeleteRestaurantDelegate.h; sourceTree = "<group>"; };
+		4FF610E6188CD7DC0075B051 /* CBDeleteRestaurantDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBDeleteRestaurantDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +199,7 @@
 		4FC7B88D187E2A0700D2B8D7 /* gasp */ = {
 			isa = PBXGroup;
 			children = (
+				4FF610E1188CC3B90075B051 /* Delegates */,
 				4FC7B896187E2A0700D2B8D7 /* CBAppDelegate.h */,
 				4FC7B897187E2A0700D2B8D7 /* CBAppDelegate.m */,
 				4FC7B899187E2A0700D2B8D7 /* Main_iPhone.storyboard */,
@@ -198,8 +214,6 @@
 				4FC7B8A0187E2A0700D2B8D7 /* CBViewController.m */,
 				4F7C3D5318876906003E290D /* CBGaspPlaces.h */,
 				4F7C3D5418876906003E290D /* CBGaspPlaces.m */,
-				4FEA47B3188CB03700941E34 /* CBAddReviewDelegate.h */,
-				4FEA47B4188CB03700941E34 /* CBAddReviewDelegate.m */,
 				4FC7B8A2187E2A0700D2B8D7 /* Images.xcassets */,
 				4FC7B88E187E2A0700D2B8D7 /* Supporting Files */,
 			);
@@ -233,6 +247,25 @@
 				4FC7B8B2187E2A0700D2B8D7 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4FF610E1188CC3B90075B051 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				4FF610DB188CC18C0075B051 /* CBAddUserDelegate.h */,
+				4FF610DC188CC18C0075B051 /* CBAddUserDelegate.m */,
+				4FF610DE188CC1EB0075B051 /* CBDeleteUserDelegate.h */,
+				4FF610DF188CC1EB0075B051 /* CBDeleteUserDelegate.m */,
+				4FEA47B3188CB03700941E34 /* CBAddReviewDelegate.h */,
+				4FEA47B4188CB03700941E34 /* CBAddReviewDelegate.m */,
+				4FF610D8188CBB0E0075B051 /* CBDeleteReviewDelegate.h */,
+				4FF610D9188CBB0E0075B051 /* CBDeleteReviewDelegate.m */,
+				4FF610E2188CD7CA0075B051 /* CBAddRestaurantDelegate.h */,
+				4FF610E3188CD7CA0075B051 /* CBAddRestaurantDelegate.m */,
+				4FF610E5188CD7DC0075B051 /* CBDeleteRestaurantDelegate.h */,
+				4FF610E6188CD7DC0075B051 /* CBDeleteRestaurantDelegate.m */,
+			);
+			name = Delegates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,9 +372,14 @@
 				4FC7B894187E2A0700D2B8D7 /* main.m in Sources */,
 				4FC7B898187E2A0700D2B8D7 /* CBAppDelegate.m in Sources */,
 				4FEA47B5188CB03700941E34 /* CBAddReviewDelegate.m in Sources */,
+				4FF610DA188CBB0E0075B051 /* CBDeleteReviewDelegate.m in Sources */,
+				4FF610E0188CC1EB0075B051 /* CBDeleteUserDelegate.m in Sources */,
+				4FF610E4188CD7CA0075B051 /* CBAddRestaurantDelegate.m in Sources */,
 				4F7C3D4C187E5C8B003E290D /* CBGaspRestaurants.m in Sources */,
+				4FF610DD188CC18C0075B051 /* CBAddUserDelegate.m in Sources */,
 				4F7C3D5518876906003E290D /* CBGaspPlaces.m in Sources */,
 				4F7C3D52187F60A3003E290D /* CBGaspUsers.m in Sources */,
+				4FF610E7188CD7DC0075B051 /* CBDeleteRestaurantDelegate.m in Sources */,
 				4FC7B8A1187E2A0700D2B8D7 /* CBViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

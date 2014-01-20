@@ -26,7 +26,6 @@
 
 - (NSArray *) listRestaurants:(NSString *)host {
     NSString *data = [self stringHttpGetContentsAtURL:[self makeURL: host withPath:@"restaurants"]];
-    //NSLog(@"%@\n", data);
     return [self parseJSONList:data];
 }
 
@@ -68,6 +67,47 @@
     } else {
         return nil;
     }
+}
+
+- (void) AddRestaurant:(NSString *)host
+          withDelegate: (id<NSURLConnectionDataDelegate>) callback
+              withName: (NSString *) name
+           withWebsite: (NSString *) website
+          withPlacesId: (NSString *) placesId {
+    
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys: name, @"name",
+                                                                       website, @"website",
+                                                                       placesId, @"placesId",
+                                                                       nil];
+    NSError *error;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict options:kNilOptions error:&error];
+    NSString *jsonSummary = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSMutableString *json = [[NSMutableString alloc] init];
+    [json setString:jsonSummary];
+    [json replaceOccurrencesOfString:@"\\" withString:@"" options:0 range:NSMakeRange(0, [json length])];
+    NSLog(@"%@", json);
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest
+                                    requestWithURL:[NSURL URLWithString:[host stringByAppendingString:@"/restaurants"]]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    //[request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setHTTPBody:jsonData];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:callback];
+    [connection start];
+}
+
+- (void) DeleteRestaurant:(NSString *)host
+             withDelegate: (id<NSURLConnectionDataDelegate>) callback
+             withLocation: (NSString *) location {
+    NSMutableURLRequest *request = [NSMutableURLRequest
+                                    requestWithURL:[NSURL URLWithString:location]];
+    [request setHTTPMethod:@"DELETE"];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:callback];
+    [connection start];
 }
 
 /*

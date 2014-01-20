@@ -15,6 +15,14 @@
 - (NSArray *) parseJSONList:(NSString *)responseString;
 - (NSArray *) listRestaurants:(NSString *)host;
 - (NSString *) makeURL:(NSString *)url withPath:(NSString *)path;
+- (void) AddRestaurant:(NSString *)host
+          withDelegate: (id<NSURLConnectionDataDelegate>) callback
+              withName: (NSString *) name
+           withWebsite: (NSString *) website
+          withPlacesId: (NSString *) placesId;
+- (void) DeleteRestaurant:(NSString *)host
+             withDelegate: (id<NSURLConnectionDataDelegate>) callback
+             withLocation: (NSString *) location;
 + (CBGaspRestaurants *)sharedNetworkClient;
 
 @end

@@ -15,6 +15,9 @@
 - (NSArray *) parseJSONList:(NSString *)responseString;
 - (NSArray *) listUsers:(NSString *)host;
 - (NSString *) makeURL:(NSString *)url withPath:(NSString *)path;
+- (void) AddUser:(NSString *)host
+    withDelegate: (id<NSURLConnectionDataDelegate>) callback
+        withName: (NSString *) name;
 + (CBGaspUsers *)sharedNetworkClient;
 
 @end
