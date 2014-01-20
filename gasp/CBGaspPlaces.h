@@ -11,7 +11,7 @@
 
 @interface CBGaspPlaces : NSObject
 -(void) getPlaceDetails:(NSString *) reference;
--(void) getGooglePlaces:(NSString *) googleType
+-(void) getGooglePlaces:(NSString *)googleType
            withLocation:(NSString *) location
              withRadius:(NSString *) radius;
 + (CBGaspPlaces *)sharedNetworkClient;

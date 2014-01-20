@@ -14,6 +14,7 @@
 #import "CBAddReviewDelegate.h"
 #import "CBAddUserDelegate.h"
 #import "CBAddRestaurantDelegate.h"
+#import "ASService.h"
 
 #import <GoogleMaps/GoogleMaps.h>
 
@@ -110,9 +111,21 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
     [self loadInitialRestaurants];
     [self loadInitialReviews];
     [self loadInitialUsers];
+    
     //[self addReview];
     //[self addUser];
     //[self addRestaurant];
+    
+    ASService *service = [[ASService alloc] init];
+    NSString *url = @"www.service.com";
+    [service getServerResponseForUrl:url withCallback:^(NSString *data, NSError *error) {
+        if (error == nil) {
+            NSLog(@"Returned: %@", data);
+        }
+        else {
+            NSLog(@"Error: %@", error);
+        }
+    }];
     
     // Create a GMSCameraPosition that tells the map to display the
     // coordinate -33.86,151.20 at zoom level 6.

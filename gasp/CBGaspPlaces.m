@@ -27,7 +27,9 @@
     return sharedInstance;
 }
 
--(void) getGooglePlaces:(NSString *)googleType withLocation:(NSString *) location withRadius:(NSString *) radius {
+-(void) getGooglePlaces:(NSString *)googleType
+           withLocation:(NSString *) location
+             withRadius:(NSString *) radius {
 
     NSString *url = [NSString stringWithFormat:GOOGLE_PLACES_SEARCH, location, radius, googleType, GOOGLE_API_KEY];
     
@@ -65,7 +67,7 @@
         NSString* longitude = [[[location objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lng"];
         NSLog(@"Co-ords = %@,%@", latitude, longitude);
         
-        [self getPlaceDetails:reference];
+        //[self getPlaceDetails:reference];
     }
 }
 

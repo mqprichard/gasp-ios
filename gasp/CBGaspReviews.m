@@ -110,7 +110,7 @@
 
 - (void) DeleteReview:(NSString *)host
          withDelegate: (id<NSURLConnectionDataDelegate>) callback
-             withLocation: (NSString *) theReview {
+         withLocation: (NSString *) theReview {
     NSMutableURLRequest *request = [NSMutableURLRequest
                                     requestWithURL:[NSURL URLWithString:theReview]];
     [request setHTTPMethod:@"DELETE"];
