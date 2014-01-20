@@ -15,6 +15,13 @@
 - (NSArray *) parseJSONList:(NSString *)responseString;
 - (NSArray *) listReviews:(NSString *)host;
 - (NSString *) makeURL:(NSString *)url withPath:(NSString *)path;
+- (void) AddReview:(NSString *)host
+      withDelegate: (id<NSURLConnectionDataDelegate>) callback
+          withUser: (NSNumber *) theUser
+    withRestaurant: (NSNumber *) theRestaurant
+          withStar: (NSNumber *) starRating
+      withComments: (NSString *) comment;
+
 + (CBGaspReviews *)sharedNetworkClient;
 
 @end

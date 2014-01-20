@@ -40,6 +40,7 @@
 		4FC7B8D6187E2AD000D2B8D7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC7B8D5187E2AD000D2B8D7 /* QuartzCore.framework */; };
 		4FC7B8D8187E2AD900D2B8D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC7B8D7187E2AD900D2B8D7 /* SystemConfiguration.framework */; };
 		4FC7B8DA187E2EC200D2B8D7 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4FC7B8D9187E2EC200D2B8D7 /* GoogleMaps.bundle */; };
+		4FEA47B5188CB03700941E34 /* CBAddReviewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEA47B4188CB03700941E34 /* CBAddReviewDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,8 @@
 		4FC7B8D5187E2AD000D2B8D7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4FC7B8D7187E2AD900D2B8D7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4FC7B8D9187E2EC200D2B8D7 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = "../../../GoogleMaps-iOS-1.6.1/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle"; sourceTree = "<group>"; };
+		4FEA47B3188CB03700941E34 /* CBAddReviewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBAddReviewDelegate.h; sourceTree = "<group>"; };
+		4FEA47B4188CB03700941E34 /* CBAddReviewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBAddReviewDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +198,8 @@
 				4FC7B8A0187E2A0700D2B8D7 /* CBViewController.m */,
 				4F7C3D5318876906003E290D /* CBGaspPlaces.h */,
 				4F7C3D5418876906003E290D /* CBGaspPlaces.m */,
+				4FEA47B3188CB03700941E34 /* CBAddReviewDelegate.h */,
+				4FEA47B4188CB03700941E34 /* CBAddReviewDelegate.m */,
 				4FC7B8A2187E2A0700D2B8D7 /* Images.xcassets */,
 				4FC7B88E187E2A0700D2B8D7 /* Supporting Files */,
 			);
@@ -333,6 +338,7 @@
 				4F7C3D4F187F4800003E290D /* CBGaspReviews.m in Sources */,
 				4FC7B894187E2A0700D2B8D7 /* main.m in Sources */,
 				4FC7B898187E2A0700D2B8D7 /* CBAppDelegate.m in Sources */,
+				4FEA47B5188CB03700941E34 /* CBAddReviewDelegate.m in Sources */,
 				4F7C3D4C187E5C8B003E290D /* CBGaspRestaurants.m in Sources */,
 				4F7C3D5518876906003E290D /* CBGaspPlaces.m in Sources */,
 				4F7C3D52187F60A3003E290D /* CBGaspUsers.m in Sources */,

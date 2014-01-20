@@ -7,6 +7,7 @@
 //
 
 #import "CBGaspReviews.h"
+#import "CBAddReviewDelegate.h"
 #import <Foundation/Foundation.h>
 
 @implementation CBGaspReviews
@@ -71,6 +72,43 @@
         return nil;
     }
 }
+
+- (void) AddReview:(NSString *)host
+      withDelegate: (id<NSURLConnectionDataDelegate>) callback
+          withUser: (NSNumber *) theUser
+    withRestaurant: (NSNumber *) theRestaurant
+          withStar: (NSNumber *) starRating
+      withComments: (NSString *) comment {
+    
+    NSString* userString = [NSString stringWithFormat:@"%@%@%@", host, @"/user/", theUser];
+    NSString* restString = [NSString stringWithFormat:@"%@%@%@", host, @"/restaurant/", theRestaurant];
+    
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys: userString, @"user",
+                          restString, @"restaurant",
+                          starRating, @"star",
+                          comment, @"comment",
+                          nil];
+    NSError *error;
+    
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict options:kNilOptions error:&error];
+    NSString *jsonSummary = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSMutableString *json = [[NSMutableString alloc] init];
+    [json setString:jsonSummary];
+    [json replaceOccurrencesOfString:@"\\" withString:@"" options:0 range:NSMakeRange(0, [json length])];
+    NSLog(@"%@", json);
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest
+                                    requestWithURL:[NSURL URLWithString:[host stringByAppendingString:@"/reviews"]]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setHTTPBody:jsonData];
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:callback];
+    [connection start];
+}
+
 
 /*
  * We only need one instance of this network client for the app.

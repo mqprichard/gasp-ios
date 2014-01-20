@@ -11,6 +11,7 @@
 #import "CBGaspReviews.h"
 #import "CBGaspUsers.h"
 #import "CBGaspPlaces.h"
+#import "CBAddReviewDelegate.h"
 
 #import <GoogleMaps/GoogleMaps.h>
 
@@ -76,6 +77,16 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
     });
 }
 
+- (void)addReview {
+    CBGaspReviews *client = [[CBGaspReviews alloc] init];
+
+    //[client AddReview:HOST withUser:@1 withRestaurant:@1 withStar:@5 withComments:@"Great"];
+    
+    CBAddReviewDelegate *addReviewHandler = [[CBAddReviewDelegate alloc] init];
+    [client AddReview:HOST withDelegate:addReviewHandler withUser:@1 withRestaurant:@1 withStar:@5 withComments:@"Great"];
+
+}
+
 - (void)viewDidLoad
 {
     locationManager = [[CLLocationManager alloc] init];
@@ -88,6 +99,8 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
     [self loadInitialRestaurants];
     [self loadInitialReviews];
     [self loadInitialUsers];
+    [self addReview];
+    
     
     // Create a GMSCameraPosition that tells the map to display the
     // coordinate -33.86,151.20 at zoom level 6.
