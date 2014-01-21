@@ -18,6 +18,8 @@
 
 @implementation CBGaspPlaces
 
+void(^getGooglePlacesCallback)(NSDictionary *result, NSError *error);
+
 + (CBGaspPlaces *)sharedNetworkClient {
     static dispatch_once_t once;
     static id sharedInstance;
@@ -29,13 +31,18 @@
 
 -(void) getGooglePlaces:(NSString *)googleType
            withLocation:(NSString *) location
-             withRadius:(NSString *) radius {
-
+             withRadius:(NSString *) radius
+           withCallback:(CBCompletionBlock)callback{
+ 
     NSString *url = [NSString stringWithFormat:GOOGLE_PLACES_SEARCH, location, radius, googleType, GOOGLE_API_KEY];
     
-    //Formulate the string as a URL object.
+    // Formulate the string as a URL object.
     NSURL *googleRequestURL = [[NSURL alloc] initWithString:[url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     NSLog(@"%@", googleRequestURL);
+    
+    // Set callback with results/error data
+    //getGooglePlacesCallback = [callback copy];
+    getGooglePlacesCallback = callback;
     
     // Retrieve the results of the URL.
     dispatch_async(kBgQueue, ^{
@@ -51,24 +58,8 @@
     //parse out the json data
     NSError* error;
     NSDictionary* json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
-    NSArray* places = [json objectForKey:@"results"];
-    NSLog(@"Returned %i places", [places count]);
-    //NSLog(@"Google Data: %@", places);
     
-    for (int i = 0; i < [places count]; i++) {
-        NSDictionary* location = [places objectAtIndex:i];
-        NSString* id = [location objectForKey:@"id"];
-        NSLog(@"Google Places API Id: %@", id);
-        
-        NSString* reference = [location objectForKey:@"reference"];
-        NSLog(@"Google Places API Reference: %@", reference);
-        
-        NSString* latitude = [[[location objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lat"];
-        NSString* longitude = [[[location objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lng"];
-        NSLog(@"Co-ords = %@,%@", latitude, longitude);
-        
-        //[self getPlaceDetails:reference];
-    }
+    getGooglePlacesCallback(json, error);
 }
 
 -(void) getPlaceDetails:(NSString *) reference {
@@ -93,7 +84,7 @@
     //parse out the json data
     NSError* error;
     NSDictionary* json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
-    NSDictionary* details = [json objectForKey:@"result"];
+    //NSDictionary* details = [json objectForKey:@"result"];
     //NSLog(@"Google Data: %@", details);
 }
 

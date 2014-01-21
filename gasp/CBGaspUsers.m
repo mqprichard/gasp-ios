@@ -45,7 +45,7 @@
         for (int i = 0; i < [object count]; i++) {
             NSString* url = [[object objectAtIndex:i] valueForKey:@"url"];
             NSString* name = [[object objectAtIndex:i] valueForKey:@"name"];
-            NSLog(@"USER Url: %@, Name: %@", url, name);
+            //NSLog(@"USER Url: %@, Name: %@", url, name);
         }
         
         return (NSArray *) object;

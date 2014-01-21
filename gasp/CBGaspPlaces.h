@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CLLocation.h>
 
+typedef void (^CBCompletionBlock)(NSDictionary *data, NSError *error);
+
 @interface CBGaspPlaces : NSObject
 -(void) getPlaceDetails:(NSString *) reference;
--(void) getGooglePlaces:(NSString *)googleType
+-(void) getGooglePlaces:(NSString *) googleType
            withLocation:(NSString *) location
-             withRadius:(NSString *) radius;
+             withRadius:(NSString *) radius
+           withCallback:(CBCompletionBlock) callback;
 + (CBGaspPlaces *)sharedNetworkClient;
 @end
