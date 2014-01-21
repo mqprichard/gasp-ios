@@ -316,6 +316,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = CloudBees;
 				TargetAttributes = {
+					4FC7B883187E2A0700D2B8D7 = {
+						DevelopmentTeam = 2525NH3G3Y;
+					};
 					4FC7B8A7187E2A0700D2B8D7 = {
 						TestTargetID = 4FC7B883187E2A0700D2B8D7;
 					};
@@ -517,6 +520,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/markprichard/projects/gasp/gasp-xcode/gasp",
@@ -526,6 +531,7 @@
 				INFOPLIST_FILE = "gasp/gasp-Info.plist";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -535,6 +541,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/markprichard/projects/gasp/gasp-xcode/gasp",
@@ -544,6 +552,7 @@
 				INFOPLIST_FILE = "gasp/gasp-Info.plist";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

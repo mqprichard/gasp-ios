@@ -34,13 +34,13 @@ void(^getPlaceDetailsCallback)(NSDictionary *result, NSError *error);
            withLocation:(NSString *) location
              withRadius:(NSString *) radius
            withCallback:(CBCompletionBlock)callback {
- 
+    
+    // Format Google Places API query string
     NSString *url = [NSString stringWithFormat:GOOGLE_PLACES_SEARCH, location, radius, googleType, GOOGLE_API_KEY];
     NSURL *googleRequestURL = [[NSURL alloc] initWithString:[url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     NSLog(@"%@", googleRequestURL);
     
     // Set callback with results/error data
-    //getGooglePlacesCallback = [callback copy];
     getGooglePlacesCallback = callback;
     
     // Retrieve the results of the URL.
@@ -54,7 +54,7 @@ void(^getPlaceDetailsCallback)(NSDictionary *result, NSError *error);
     if (responseData == nil)
         NSLog(@"%@", @"Google Places API call Failed");
 
-    //parse out the json data
+    //parse the result JSON data
     NSError* error;
     NSDictionary* json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
     
@@ -64,6 +64,7 @@ void(^getPlaceDetailsCallback)(NSDictionary *result, NSError *error);
 -(void) getPlaceDetails:(NSString *) reference
            withCallback:(CBCompletionBlock)callback {
     
+    // Format Google Places API query string
     NSString *url = [NSString stringWithFormat:GOOGLE_PLACES_DETAILS, GOOGLE_API_KEY, reference];
     NSURL *googleRequestURL = [[NSURL alloc] initWithString:[url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     NSLog(@"%@", googleRequestURL);

@@ -141,11 +141,9 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
 {
-    //NSLog(@"didUpdateToLocation: %@", newLocation);
     location = newLocation;
     
     // Reverse Geocoding
-    NSLog(@"Resolving the Address");
     [geocoder reverseGeocodeLocation:location
                    completionHandler:^(NSArray *placemarks, NSError *error) {
         if (error == nil && [placemarks count] > 0) {
@@ -168,41 +166,41 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
                        withLocation:latlng
                          withRadius:radius
                        withCallback:^(NSDictionary *data, NSError *error) {
-                @try {
-                    if (error != nil) {
-                        NSLog(@"Google Places API Error: %@", error);
-                    } else {
-                        NSArray* places = [data objectForKey:@"results"];
-                        NSLog(@"Returned %lu places", (unsigned long)[places count]);
-                
-                        for (int i = 0; i < [places count]; i++) {
-                            NSDictionary* place = [places objectAtIndex:i];
-                            NSString* id = [place objectForKey:@"id"];
-                            //NSLog(@"Google Places API Id: %@", id);
-
-                            CLLocationCoordinate2D position = CLLocationCoordinate2DMake(
-                                [[[[place objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lat"] doubleValue],
-                                [[[[place objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lng"] doubleValue]
-                            );
-                                                                                         
-                            GMSMarker *marker = [GMSMarker markerWithPosition:position];
-                            marker.title = [place objectForKey:@"name"];
-                            marker.map = mapView_;
-                            marker.icon = [GMSMarker markerImageWithColor:[UIColor redColor]];
-                            
-                            for (int j = 0; j < [restaurants count]; j++) {
-                                if ([[[restaurants objectAtIndex:j] valueForKey:@"placesId"] isEqualToString:id]) {
-                                    marker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-                @catch (NSException *exception) {
-                    NSLog(@"%@", exception);
-                }
-             }];
+                           @try {
+                               if (error != nil) {
+                                   NSLog(@"Google Places API Error: %@", error);
+                               } else {
+                                   NSArray* places = [data objectForKey:@"results"];
+                                   NSLog(@"Returned %lu places", (unsigned long)[places count]);
+                                   
+                                   for (int i = 0; i < [places count]; i++) {
+                                       NSDictionary* place = [places objectAtIndex:i];
+                                       NSString* id = [place objectForKey:@"id"];
+                                       //NSLog(@"Google Places API Id: %@", id);
+                                       
+                                       CLLocationCoordinate2D position = CLLocationCoordinate2DMake(
+                                        [[[[place objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lat"] doubleValue],
+                                        [[[[place objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lng"] doubleValue]
+                                       );
+                                       
+                                       GMSMarker *marker = [GMSMarker markerWithPosition:position];
+                                       marker.title = [place objectForKey:@"name"];
+                                       marker.map = mapView_;
+                                       marker.icon = [GMSMarker markerImageWithColor:[UIColor redColor]];
+                                       
+                                       for (int j = 0; j < [restaurants count]; j++) {
+                                           if ([[[restaurants objectAtIndex:j] valueForKey:@"placesId"] isEqualToString:id]) {
+                                               marker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
+                                               break;
+                                           }
+                                       }
+                                   }
+                               }
+                           }
+                           @catch (NSException *exception) {
+                               NSLog(@"%@", exception);
+                           }
+                       }];
             
         } else {
             NSLog(@"%@", error.debugDescription);
