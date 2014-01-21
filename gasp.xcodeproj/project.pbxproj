@@ -46,7 +46,6 @@
 		4FF610E0188CC1EB0075B051 /* CBDeleteUserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF610DF188CC1EB0075B051 /* CBDeleteUserDelegate.m */; };
 		4FF610E4188CD7CA0075B051 /* CBAddRestaurantDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF610E3188CD7CA0075B051 /* CBAddRestaurantDelegate.m */; };
 		4FF610E7188CD7DC0075B051 /* CBDeleteRestaurantDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF610E6188CD7DC0075B051 /* CBDeleteRestaurantDelegate.m */; };
-		4FF610EA188DA2B10075B051 /* ASService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FF610E9188DA2B10075B051 /* ASService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,8 +113,6 @@
 		4FF610E3188CD7CA0075B051 /* CBAddRestaurantDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBAddRestaurantDelegate.m; sourceTree = "<group>"; };
 		4FF610E5188CD7DC0075B051 /* CBDeleteRestaurantDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBDeleteRestaurantDelegate.h; sourceTree = "<group>"; };
 		4FF610E6188CD7DC0075B051 /* CBDeleteRestaurantDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBDeleteRestaurantDelegate.m; sourceTree = "<group>"; };
-		4FF610E8188DA2B10075B051 /* ASService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASService.h; sourceTree = "<group>"; };
-		4FF610E9188DA2B10075B051 /* ASService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,8 +216,6 @@
 				4F7C3D5418876906003E290D /* CBGaspPlaces.m */,
 				4FC7B8A2187E2A0700D2B8D7 /* Images.xcassets */,
 				4FC7B88E187E2A0700D2B8D7 /* Supporting Files */,
-				4FF610E8188DA2B10075B051 /* ASService.h */,
-				4FF610E9188DA2B10075B051 /* ASService.m */,
 			);
 			path = gasp;
 			sourceTree = "<group>";
@@ -374,7 +369,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F7C3D4F187F4800003E290D /* CBGaspReviews.m in Sources */,
-				4FF610EA188DA2B10075B051 /* ASService.m in Sources */,
 				4FC7B894187E2A0700D2B8D7 /* main.m in Sources */,
 				4FC7B898187E2A0700D2B8D7 /* CBAppDelegate.m in Sources */,
 				4FEA47B5188CB03700941E34 /* CBAddReviewDelegate.m in Sources */,

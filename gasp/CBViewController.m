@@ -14,7 +14,6 @@
 #import "CBAddReviewDelegate.h"
 #import "CBAddUserDelegate.h"
 #import "CBAddRestaurantDelegate.h"
-#import "ASService.h"
 
 #import <GoogleMaps/GoogleMaps.h>
 
@@ -130,20 +129,25 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     NSLog(@"didFailWithError: %@", error);
-    UIAlertView *errorAlert = [[UIAlertView alloc]
-                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                         message:@"Failed to Get Your Location"
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
     [errorAlert show];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation
 {
-    NSLog(@"didUpdateToLocation: %@", newLocation);
+    //NSLog(@"didUpdateToLocation: %@", newLocation);
     location = newLocation;
     
     // Reverse Geocoding
     NSLog(@"Resolving the Address");
-    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-        
+    [geocoder reverseGeocodeLocation:location
+                   completionHandler:^(NSArray *placemarks, NSError *error) {
         if (error == nil && [placemarks count] > 0) {
             placemark = [placemarks lastObject];
             NSLog(@"Current Location: %@ %@ %@ %@ %@ %@",
@@ -154,11 +158,16 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
                                  placemark.postalCode,
                                  placemark.country);
             
-            NSString *latlng = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
+            NSString *latlng = [NSString stringWithFormat:@"%f,%f",
+                                location.coordinate.latitude,
+                                location.coordinate.longitude];
             NSString *radius = [NSString stringWithFormat:@"%i", 500];
             
             CBGaspPlaces* places = [CBGaspPlaces sharedNetworkClient];
-            [places getGooglePlaces:GOOGLE_TYPES withLocation:latlng withRadius:radius withCallback:^(NSDictionary *data, NSError *error) {
+            [places getGooglePlaces:GOOGLE_TYPES
+                       withLocation:latlng
+                         withRadius:radius
+                       withCallback:^(NSDictionary *data, NSError *error) {
                 @try {
                     if (error != nil) {
                         NSLog(@"Google Places API Error: %@", error);
@@ -169,12 +178,13 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
                         for (int i = 0; i < [places count]; i++) {
                             NSDictionary* place = [places objectAtIndex:i];
                             NSString* id = [place objectForKey:@"id"];
-                            NSLog(@"Google Places API Id: %@", id);
+                            //NSLog(@"Google Places API Id: %@", id);
 
-                            
-                            CLLocationDegrees lat = [[[[place objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lat"] doubleValue];
-                            CLLocationDegrees lng = [[[[place objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lng"] doubleValue];
-                            CLLocationCoordinate2D position = CLLocationCoordinate2DMake(lat,lng);
+                            CLLocationCoordinate2D position = CLLocationCoordinate2DMake(
+                                [[[[place objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lat"] doubleValue],
+                                [[[[place objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lng"] doubleValue]
+                            );
+                                                                                         
                             GMSMarker *marker = [GMSMarker markerWithPosition:position];
                             marker.title = [place objectForKey:@"name"];
                             marker.map = mapView_;
@@ -182,7 +192,6 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
                             
                             for (int j = 0; j < [restaurants count]; j++) {
                                 if ([[[restaurants objectAtIndex:j] valueForKey:@"placesId"] isEqualToString:id]) {
-                                    NSLog(@"Gasp! Resaurant");
                                     marker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
                                     break;
                                 }

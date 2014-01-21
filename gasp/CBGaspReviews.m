@@ -44,9 +44,9 @@
     if([object isKindOfClass:[NSArray class]]) {
         
         for (int i = 0; i < [object count]; i++) {
-            NSString* url = [[object objectAtIndex:i] valueForKey:@"url"];
-            NSString* star = [[object objectAtIndex:i] valueForKey:@"star"];
-            NSString* comment = [[object objectAtIndex:i] valueForKey:@"comment"];
+            //NSString* url = [[object objectAtIndex:i] valueForKey:@"url"];
+            //NSString* star = [[object objectAtIndex:i] valueForKey:@"star"];
+            //NSString* comment = [[object objectAtIndex:i] valueForKey:@"comment"];
             //NSLog(@"REVIEW Url: %@, Comment: %@, Star: %@", url, star, comment);
         }
         

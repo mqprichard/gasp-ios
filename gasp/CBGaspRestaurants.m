@@ -42,10 +42,10 @@
     if([object isKindOfClass:[NSArray class]]) {
         
         for (int i = 0; i < [object count]; i++) {
-            NSString* name = [[object objectAtIndex:i] valueForKey:@"name"];
-            NSNumber* id = [[object objectAtIndex:i] valueForKey:@"id"];
-            NSString* placesId = [[object objectAtIndex:i] valueForKey:@"placesId"];
-            NSLog(@"RESTAURANT Id: %@, Name: %@, Places Id: %@", id, name, placesId);
+            //NSString* name = [[object objectAtIndex:i] valueForKey:@"name"];
+            //NSNumber* id = [[object objectAtIndex:i] valueForKey:@"id"];
+            //NSString* placesId = [[object objectAtIndex:i] valueForKey:@"placesId"];
+            //NSLog(@"RESTAURANT Id: %@, Name: %@, Places Id: %@", id, name, placesId);
         }
 
         return (NSArray *) object;

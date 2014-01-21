@@ -11,5 +11,16 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface CBViewController : UIViewController<GMSMapViewDelegate, CLLocationManagerDelegate>
+- (void)loadInitialRestaurants;
+- (void)loadInitialReviews;
+- (void)loadInitialUsers;
+- (void)viewDidLoad;
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error;
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation;
 - (void)displayLocations: (NSArray *)places;
+- (void)didReceiveMemoryWarning;
+- (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate;
 @end
