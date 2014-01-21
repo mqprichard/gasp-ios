@@ -19,6 +19,7 @@
 @implementation CBGaspPlaces
 
 void(^getGooglePlacesCallback)(NSDictionary *result, NSError *error);
+void(^getPlaceDetailsCallback)(NSDictionary *result, NSError *error);
 
 + (CBGaspPlaces *)sharedNetworkClient {
     static dispatch_once_t once;
@@ -32,11 +33,9 @@ void(^getGooglePlacesCallback)(NSDictionary *result, NSError *error);
 -(void) getGooglePlaces:(NSString *)googleType
            withLocation:(NSString *) location
              withRadius:(NSString *) radius
-           withCallback:(CBCompletionBlock)callback{
+           withCallback:(CBCompletionBlock)callback {
  
     NSString *url = [NSString stringWithFormat:GOOGLE_PLACES_SEARCH, location, radius, googleType, GOOGLE_API_KEY];
-    
-    // Formulate the string as a URL object.
     NSURL *googleRequestURL = [[NSURL alloc] initWithString:[url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     NSLog(@"%@", googleRequestURL);
     
@@ -62,13 +61,15 @@ void(^getGooglePlacesCallback)(NSDictionary *result, NSError *error);
     getGooglePlacesCallback(json, error);
 }
 
--(void) getPlaceDetails:(NSString *) reference {
+-(void) getPlaceDetails:(NSString *) reference
+           withCallback:(CBCompletionBlock)callback {
     
     NSString *url = [NSString stringWithFormat:GOOGLE_PLACES_DETAILS, GOOGLE_API_KEY, reference];
-    
-    //Formulate the string as a URL object.
     NSURL *googleRequestURL = [[NSURL alloc] initWithString:[url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     NSLog(@"%@", googleRequestURL);
+    
+    // Set callback with results/error data
+    getPlaceDetailsCallback = callback;
     
     // Retrieve the results of the URL.
     dispatch_async(kBgQueue, ^{
@@ -84,8 +85,9 @@ void(^getGooglePlacesCallback)(NSDictionary *result, NSError *error);
     //parse out the json data
     NSError* error;
     NSDictionary* json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
-    //NSDictionary* details = [json objectForKey:@"result"];
-    //NSLog(@"Google Data: %@", details);
+    NSDictionary* details = [json objectForKey:@"result"];
+    
+    getPlaceDetailsCallback(details, error);
 }
 
 @end

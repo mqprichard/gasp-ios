@@ -12,7 +12,8 @@
 typedef void (^CBCompletionBlock)(NSDictionary *data, NSError *error);
 
 @interface CBGaspPlaces : NSObject
--(void) getPlaceDetails:(NSString *) reference;
+-(void) getPlaceDetails:(NSString *) reference
+           withCallback:(CBCompletionBlock)callback;
 -(void) getGooglePlaces:(NSString *) googleType
            withLocation:(NSString *) location
              withRadius:(NSString *) radius
