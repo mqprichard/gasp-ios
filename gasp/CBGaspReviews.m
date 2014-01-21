@@ -47,7 +47,7 @@
             NSString* url = [[object objectAtIndex:i] valueForKey:@"url"];
             NSString* star = [[object objectAtIndex:i] valueForKey:@"star"];
             NSString* comment = [[object objectAtIndex:i] valueForKey:@"comment"];
-            NSLog(@"REVIEW Url: %@, Comment: %@, Star: %@", url, star, comment);
+            //NSLog(@"REVIEW Url: %@, Comment: %@, Star: %@", url, star, comment);
         }
         
         return (NSArray *) object;

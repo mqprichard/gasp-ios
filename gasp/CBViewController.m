@@ -30,11 +30,10 @@
     CLGeocoder *geocoder;
     CLPlacemark *placemark;
     CLLocation *location;
+    NSArray *restaurants;
+    NSArray *reviews;
+    NSArray *users;
 }
-
-NSArray *restaurants;
-NSArray *reviews;
-NSArray *users;
 
 static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
 
@@ -112,21 +111,6 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
     [self loadInitialReviews];
     [self loadInitialUsers];
     
-    //[self addReview];
-    //[self addUser];
-    //[self addRestaurant];
-    
-    ASService *service = [[ASService alloc] init];
-    NSString *url = @"www.service.com";
-    [service getServerResponseForUrl:url withCallback:^(NSString *data, NSError *error) {
-        if (error == nil) {
-            NSLog(@"Returned: %@", data);
-        }
-        else {
-            NSLog(@"Error: %@", error);
-        }
-    }];
-    
     // Create a GMSCameraPosition that tells the map to display the
     // coordinate -33.86,151.20 at zoom level 6.
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:37.3750274
@@ -159,7 +143,7 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
     // Reverse Geocoding
     NSLog(@"Resolving the Address");
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-        //NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
+        
         if (error == nil && [placemarks count] > 0) {
             placemark = [placemarks lastObject];
             NSLog(@"Current Location: %@ %@ %@ %@ %@ %@",
@@ -173,14 +157,48 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
             NSString *latlng = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
             NSString *radius = [NSString stringWithFormat:@"%i", 500];
             
-            CBGaspPlaces* places;
-            places = [CBGaspPlaces sharedNetworkClient];
-            //[places getGooglePlaces:GOOGLE_TYPES withLocation:latlng withRadius:radius];
+            CBGaspPlaces* places = [CBGaspPlaces sharedNetworkClient];
+            [places getGooglePlaces:GOOGLE_TYPES withLocation:latlng withRadius:radius withCallback:^(NSDictionary *data, NSError *error) {
+                @try {
+                    if (error != nil) {
+                        NSLog(@"Google Places API Error: %@", error);
+                    } else {
+                        NSArray* places = [data objectForKey:@"results"];
+                        NSLog(@"Returned %lu places", (unsigned long)[places count]);
+                
+                        for (int i = 0; i < [places count]; i++) {
+                            NSDictionary* place = [places objectAtIndex:i];
+                            NSString* id = [place objectForKey:@"id"];
+                            NSLog(@"Google Places API Id: %@", id);
+
+                            
+                            CLLocationDegrees lat = [[[[place objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lat"] doubleValue];
+                            CLLocationDegrees lng = [[[[place objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lng"] doubleValue];
+                            CLLocationCoordinate2D position = CLLocationCoordinate2DMake(lat,lng);
+                            GMSMarker *marker = [GMSMarker markerWithPosition:position];
+                            marker.title = [place objectForKey:@"name"];
+                            marker.map = mapView_;
+                            marker.icon = [GMSMarker markerImageWithColor:[UIColor redColor]];
+                            
+                            for (int j = 0; j < [restaurants count]; j++) {
+                                if ([[[restaurants objectAtIndex:j] valueForKey:@"placesId"] isEqualToString:id]) {
+                                    NSLog(@"Gasp! Resaurant");
+                                    marker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                @catch (NSException *exception) {
+                    NSLog(@"%@", exception);
+                }
+             }];
             
         } else {
             NSLog(@"%@", error.debugDescription);
         }
-    } ];
+    }];
 }
 
 - (void)displayLocations: (NSArray *)places
