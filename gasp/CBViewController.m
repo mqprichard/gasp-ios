@@ -126,7 +126,8 @@ static NSString *const HOST = @"http://gasp2.partnerdemo.cloudbees.net";
 
 #pragma mark - CLLocationManagerDelegate
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error
 {
     NSLog(@"didFailWithError: %@", error);
     UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error"
